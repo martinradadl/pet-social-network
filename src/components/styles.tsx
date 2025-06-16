@@ -3,8 +3,10 @@ import {StyleSheet} from 'react-native';
 export const postStyles = StyleSheet.create({
   header: {
     flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 8,
     paddingHorizontal: 10,
+    gap: 8,
   },
   userProfilePic: {
     height: 40,
@@ -29,13 +31,15 @@ export const postStyles = StyleSheet.create({
   },
   option: {
     flexDirection: 'row',
+    alignItems: 'center',
     gap: 2,
   },
   count: {
-    fontSize: 24,
+    fontSize: 20,
   },
-  description: {fontSize: 20},
-  date: {fontSize: 18, color: 'gray'},
+  description: {fontSize: 20, paddingHorizontal: 8},
+  date: {fontSize: 18, color: 'gray', paddingHorizontal: 8},
+  usernameOnDescription: {fontWeight: 'bold'},
 });
 
 export const footerStyles = StyleSheet.create({

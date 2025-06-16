@@ -10,7 +10,7 @@ import Icon from '@react-native-vector-icons/material-icons';
 import {useRef} from 'react';
 import {Post} from '../components/post';
 
-const HEADER_HEIGHT = 40;
+const HEADER_HEIGHT = 50;
 
 export const Home = () => {
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -88,13 +88,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    paddingHorizontal: 6,
+    paddingHorizontal: 12,
   },
   title: {fontSize: 32, flex: 1},
   followedUsersStories: {
     flexDirection: 'row',
     paddingHorizontal: 6,
-    paddingVertical: 4,
+    paddingVertical: 12,
     gap: 16,
   },
 });
