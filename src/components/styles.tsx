@@ -38,14 +38,6 @@ export const postStyles = StyleSheet.create({
     fontSize: 20,
   },
   description: {fontSize: 20, paddingHorizontal: 8},
-  date: {fontSize: 18, color: 'gray', paddingHorizontal: 8},
+  date: {fontSize: 16, color: 'gray', paddingHorizontal: 8},
   usernameOnDescription: {fontWeight: 'bold'},
-});
-
-export const footerStyles = StyleSheet.create({
-  options: {
-    flexDirection: 'row',
-    paddingVertical: 4,
-    justifyContent: 'space-around',
-  },
 });
