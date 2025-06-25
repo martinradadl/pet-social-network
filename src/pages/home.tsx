@@ -1,16 +1,10 @@
-import {
-  Animated,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-} from 'react-native';
-import {StoryIcon} from '../components/home/story-icon';
+import {Animated, SafeAreaView, StyleSheet, Text} from 'react-native';
 import Icon from '@react-native-vector-icons/material-icons';
 import {useRef} from 'react';
 import {Post} from '../components/post';
+import {StoriesCarousel} from '../components/stories/stories-carousel';
 
-const HEADER_HEIGHT = 50;
+const HEADER_HEIGHT = 86;
 
 export const Home = () => {
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -40,19 +34,7 @@ export const Home = () => {
           [{nativeEvent: {contentOffset: {y: scrollY}}}],
           {useNativeDriver: true},
         )}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.followedUsersStories}>
-          <StoryIcon />
-          <StoryIcon />
-          <StoryIcon />
-          <StoryIcon />
-          <StoryIcon />
-          <StoryIcon />
-          <StoryIcon />
-          <StoryIcon />
-        </ScrollView>
+        <StoriesCarousel />
 
         <Post />
         <Post />
@@ -81,6 +63,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
+    paddingTop: 28,
     backgroundColor: '#fff',
     zIndex: 1000,
     elevation: 4,
@@ -91,10 +74,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
   },
   title: {fontSize: 32, flex: 1},
-  followedUsersStories: {
-    flexDirection: 'row',
-    paddingHorizontal: 6,
-    paddingVertical: 12,
-    gap: 16,
-  },
 });
