@@ -1,15 +1,16 @@
 import {useRef} from 'react';
 import {
   Animated,
-  Button,
   SafeAreaView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import Icon from '@react-native-vector-icons/material-icons';
+import {StoriesCarousel} from '../components/stories/stories-carousel';
 
-const HEADER_HEIGHT = 50;
+const HEADER_HEIGHT = 86;
 
 export const Profile = () => {
   const scrollY = useRef(new Animated.Value(0)).current;
@@ -24,20 +25,20 @@ export const Profile = () => {
   const postsCount = 8;
   const followersCount = 88;
   const followingCount = 102;
-  const name = 'Real Name';
+  const name = 'Name';
   const bio = 'this is a bio';
 
   return (
     <SafeAreaView style={styles.container}>
-      <Icon name="lock-outline" size={32} color="#900" />
       <Animated.View
         style={[
           styles.header,
           {transform: [{translateY: headerTranslateAnim}]},
         ]}>
-        <Text style={styles.title}>{username}</Text>
-        <Icon name="add-box" size={32} color="#900" />
-        <Icon name="menu" size={32} color="#900" />
+        <Icon name="lock-outline" size={20} color="#900" />
+        <Text style={styles.username}>{username}</Text>
+        <Icon name="add-box" size={36} color="#900" />
+        <Icon name="menu" size={36} color="#900" />
       </Animated.View>
 
       <Animated.ScrollView
@@ -47,31 +48,37 @@ export const Profile = () => {
           [{nativeEvent: {contentOffset: {y: scrollY}}}],
           {useNativeDriver: true},
         )}>
-        <View style={styles.overview}>
-          <View style={styles.userPhoto} />
-          <View style={styles.counter}>
-            <Text style={styles.counterValue}>{postsCount}</Text>
-            <Text style={styles.counterLabel}>posts</Text>
+        <View style={styles.details}>
+          <View style={styles.overview}>
+            <View style={styles.userPhoto} />
+            <View style={styles.counter}>
+              <Text style={styles.counterValue}>{postsCount}</Text>
+              <Text style={styles.counterLabel}>posts</Text>
+            </View>
+            <View style={styles.counter}>
+              <Text style={styles.counterValue}>{followersCount}</Text>
+              <Text style={styles.counterLabel}>followers</Text>
+            </View>
+            <View style={styles.counter}>
+              <Text style={styles.counterValue}>{followingCount}</Text>
+              <Text style={styles.counterLabel}>following</Text>
+            </View>
           </View>
-          <View style={styles.counter}>
-            <Text style={styles.counterValue}>{followersCount}</Text>
-            <Text style={styles.counterLabel}>followers</Text>
-          </View>
-          <View style={styles.counter}>
-            <Text style={styles.counterValue}>{followingCount}</Text>
-            <Text style={styles.counterLabel}>following</Text>
-          </View>
-        </View>
 
-        <View>
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.bio}>{bio}</Text>
+
+          <View style={styles.options}>
+            <TouchableOpacity style={styles.optionsButton}>
+              <Text style={styles.optionsButtonText}>Edit profile</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.optionsButton}>
+              <Text style={styles.optionsButtonText}>Share profile</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
-        <View style={styles.options}>
-          <Button title="Edit profile" />
-          <Button title="Share profile" />
-        </View>
+        <StoriesCarousel />
 
         <View style={styles.tabs}>
           <Icon name="apps" size={32} color="#900" />
@@ -93,6 +100,7 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
+    paddingTop: 28,
     backgroundColor: '#fff',
     zIndex: 1000,
     elevation: 4,
@@ -102,23 +110,35 @@ const styles = StyleSheet.create({
     gap: 6,
     paddingHorizontal: 12,
   },
-  title: {fontSize: 28, flex: 1, fontWeight: 'bold'},
+  username: {fontSize: 24, flex: 1, fontWeight: 'bold'},
+  details: {
+    paddingHorizontal: 10,
+  },
   overview: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around',
+    paddingTop: 20,
   },
   userPhoto: {
-    height: 72,
-    width: 72,
+    height: 80,
+    width: 80,
     borderRadius: 9999999,
     backgroundColor: 'red',
   },
-  counter: {gap: 4},
+  counter: {gap: 3, alignItems: 'center'},
   counterValue: {fontSize: 24, fontWeight: 'bold'},
-  counterLabel: {fontSize: 20},
+  counterLabel: {fontSize: 16},
   name: {fontSize: 20, fontWeight: 'bold'},
   bio: {fontSize: 20},
-  options: {flexDirection: 'row', gap: 4},
+  options: {flexDirection: 'row', gap: 8, paddingTop: 12, paddingBottom: 20},
+  optionsButton: {
+    borderRadius: 6,
+    backgroundColor: 'gray',
+    paddingVertical: 4,
+    flex: 1,
+    alignItems: 'center',
+  },
+  optionsButtonText: {color: 'white', fontSize: 16},
   tabs: {flexDirection: 'row', justifyContent: 'space-around'},
 });
