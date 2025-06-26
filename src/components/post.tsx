@@ -9,39 +9,43 @@ export const Post = () => {
   const sentsCount = 0;
   const description = 'post description';
   const date = '30 minutes ago';
+  const iconsSize = 28;
 
   return (
     <View>
       <View style={styles.header}>
         <View style={styles.userProfilePic} />
         <Text style={styles.username}>{username}</Text>
-        <Icon name="more-vert" size={20} color="#900" />
+        <Icon name="more-vert" size={iconsSize} color="#900" />
       </View>
       <View style={styles.files} />
       <View style={styles.options}>
         <View style={styles.mainOptions}>
           <View style={styles.option}>
-            <Icon name="favorite-border" size={20} color="#900" />
+            <Icon name="favorite-border" size={iconsSize} color="#900" />
             <Text style={styles.count}>
               {likesCount > 0 ? likesCount : null}
             </Text>
           </View>
           <View style={styles.option}>
-            <Icon name="comment" size={20} color="#900" />
+            <Icon name="comment" size={iconsSize} color="#900" />
             <Text style={styles.count}>
               {commentsCount > 0 ? commentsCount : null}
             </Text>
           </View>
           <View style={styles.option}>
-            <Icon name="chat-bubble-outline" size={20} color="#900" />
+            <Icon name="chat-bubble-outline" size={iconsSize} color="#900" />
             <Text style={styles.count}>
               {sentsCount > 0 ? sentsCount : null}
             </Text>
           </View>
         </View>
-        <Icon name="bookmark-border" size={20} color="#900" />
+        <Icon name="bookmark-border" size={iconsSize} color="#900" />
       </View>
-      <Text style={styles.description}>{description}</Text>
+      <Text style={styles.description}>
+        <Text style={styles.usernameOnDescription}>{username}</Text>{' '}
+        {description}
+      </Text>
       <Text style={styles.date}>{date}</Text>
     </View>
   );
