@@ -1,10 +1,12 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useState} from 'react';
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Text, TextInput, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {RootStackScreensList} from '../../main-router';
 import {useNavigation} from '@react-navigation/native';
 import {authStyles as styles} from './styles';
+import {register, RegisterI} from '../../data/auth';
+import {Toast} from 'toastify-react-native';
 
 type NavigationProp = NativeStackNavigationProp<RootStackScreensList, 'SignUp'>;
 
@@ -15,11 +17,30 @@ export const SignUp = () => {
   const [password, onChangePassword] = useState('');
   const navigation = useNavigation<NavigationProp>();
 
+  const hasEmptyFields = () => {
+    return name === '' || email === '' || username === '' || password === '';
+  };
+
+  const handleSubmit = async () => {
+    try {
+      if (hasEmptyFields()) {
+        () => {
+          Toast.warn('Faltan campos por llenar');
+        };
+      } else {
+        const newUser: RegisterI = {email, username, password, name};
+        await register(newUser, () => navigation.navigate('SignUpCompleted'));
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      }
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Petgram</Text>
-
-      <View style={styles.titleSpacer} />
 
       <TextInput
         style={styles.formInput}
@@ -29,8 +50,6 @@ export const SignUp = () => {
         placeholderTextColor={'#B3B9BD'}
       />
 
-      <View style={styles.formSpacer} />
-
       <TextInput
         style={styles.formInput}
         onChangeText={onChangeName}
@@ -39,8 +58,6 @@ export const SignUp = () => {
         placeholderTextColor={'#B3B9BD'}
       />
 
-      <View style={styles.formSpacer} />
-
       <TextInput
         style={styles.formInput}
         onChangeText={onChangeUsername}
@@ -48,8 +65,6 @@ export const SignUp = () => {
         placeholder="Username"
         placeholderTextColor={'#B3B9BD'}
       />
-
-      <View style={styles.formSpacer} />
 
       <TextInput
         style={styles.formInput}
@@ -60,13 +75,9 @@ export const SignUp = () => {
         placeholderTextColor={'#B3B9BD'}
       />
 
-      <View style={styles.submitSpacer} />
-
-      <TouchableOpacity style={styles.submitButton}>
+      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitButtonText}>Login</Text>
       </TouchableOpacity>
-
-      <View style={styles.formSpacer} />
 
       <Text
         style={styles.additionalOption}
