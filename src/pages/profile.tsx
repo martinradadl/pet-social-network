@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from '@react-native-vector-icons/material-icons';
 import {StoriesCarousel} from '../components/stories/stories-carousel';
+import {logout} from '../data/auth';
 
 const HEADER_HEIGHT = 86;
 
@@ -81,7 +82,14 @@ export const Profile = () => {
         <StoriesCarousel />
 
         <View style={styles.tabs}>
-          <Icon name="apps" size={32} color="#900" />
+          <Icon
+            name="apps"
+            size={32}
+            color="#900"
+            onPress={() => {
+              logout();
+            }}
+          />
           <Icon name="autorenew" size={32} color="#900" />
           <Icon name="portrait" size={32} color="#900" />
         </View>
