@@ -73,11 +73,12 @@ describe('useAuth', () => {
     it('should return error in any other case', async () => {
       jest.mocked(axios).post.mockResolvedValueOnce({
         status: 500,
+        data: {message: 'mocked error message'},
       });
 
       await login(fakeLoginCredentials);
 
-      expect(Toast.error).toHaveBeenCalledWith('Login not successful');
+      expect(Toast.error).toHaveBeenCalledWith('mocked error message');
     });
 
     it('should return logged user when status is 200', async () => {
