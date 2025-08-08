@@ -10,6 +10,7 @@ export const authStyles = StyleSheet.create({
   },
   title: {fontSize: 40, marginBottom: 20, textAlign: 'center'},
   message: {fontSize: 20, textAlign: 'center'},
+  formItem: {width: '100%'},
   formInput: {
     height: 40,
     width: '100%',
@@ -19,6 +20,12 @@ export const authStyles = StyleSheet.create({
     borderColor: '#B3B9BD',
     color: '#000000',
     paddingHorizontal: 8,
+  },
+  formInputError: {
+    paddingLeft: 4,
+    color: 'red',
+    fontSize: 10,
+    marginBottom: -4,
   },
   submitButton: {
     marginTop: 10,
