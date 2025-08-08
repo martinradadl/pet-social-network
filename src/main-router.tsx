@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {Footer} from './components/footer';
+import {MainContent} from './components/main-content';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Login} from './pages/auth/login';
 import {SignUp} from './pages/auth/sign-up';
@@ -8,12 +8,13 @@ import {SignUpCompleted} from './pages/auth/sign-up-completed';
 import {ForgotPassword} from './pages/auth/forgot-password';
 import {useAuth} from './data/auth';
 import {useShallow} from 'zustand/react/shallow';
+import ToastManager from 'toastify-react-native';
 
 export type RootStackScreensList = {
   Login: undefined;
   SignUp: undefined;
   SignUpCompleted: undefined;
-  Footer: undefined;
+  MainContent: undefined;
   ForgotPassword: undefined;
 };
 
@@ -31,6 +32,8 @@ const App = () => {
   React.useEffect(() => {
     if (user?._id) {
       setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
     }
   }, [user?._id]);
 
@@ -40,13 +43,13 @@ const App = () => {
         {isAuthenticated ? (
           <Stack.Navigator>
             <Stack.Screen
-              name="Footer"
-              component={Footer}
+              name="MainContent"
+              component={MainContent}
               options={{headerShown: false}}
             />
           </Stack.Navigator>
         ) : (
-          <Stack.Navigator initialRouteName="SignUpCompleted">
+          <Stack.Navigator initialRouteName="Login">
             <Stack.Screen
               name="Login"
               component={Login}
@@ -70,6 +73,7 @@ const App = () => {
           </Stack.Navigator>
         )}
       </NavigationContainer>
+      <ToastManager />
     </React.Fragment>
   );
 };
