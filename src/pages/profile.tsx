@@ -39,7 +39,8 @@ export const Profile = () => {
         <Icon name="lock-outline" size={20} color="#900" />
         <Text style={styles.username}>{username}</Text>
         <Icon name="add-box" size={36} color="#900" />
-        <Icon name="menu" size={36} color="#900" />
+        {/*TODO move logout to user settings page*/}
+        <Icon name="menu" size={36} color="#900" onPress={logout} />
       </Animated.View>
 
       <Animated.ScrollView
@@ -82,14 +83,7 @@ export const Profile = () => {
         <StoriesCarousel />
 
         <View style={styles.tabs}>
-          <Icon
-            name="apps"
-            size={32}
-            color="#900"
-            onPress={() => {
-              logout();
-            }}
-          />
+          <Icon name="apps" size={32} color="#900" />
           <Icon name="autorenew" size={32} color="#900" />
           <Icon name="portrait" size={32} color="#900" />
         </View>
