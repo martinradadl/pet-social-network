@@ -16,6 +16,7 @@ export interface UserI {
   bio?: string;
   profilePic: string | ImageSourcePropType;
   isPrivate: boolean;
+  isVerified: boolean;
 }
 
 export interface RegisterI {
@@ -86,9 +87,6 @@ export const register = async (newUser: RegisterI, navigate: () => void) => {
 export const login = async (loggedUser: LoginI) => {
   try {
     const response = await axios.post(`${API_URL}/auth/login`, loggedUser);
-    if (response.status === 401) {
-      Toast.error(response.data.message);
-    }
     if (response.status === 200) {
       useAuth.setState((state: State) => {
         const user = parseProfilePicToUser(response.data.user);
@@ -101,7 +99,7 @@ export const login = async (loggedUser: LoginI) => {
       });
       setExpiresOn(response.data.expiration);
     } else {
-      Toast.error('Login not successful');
+      Toast.error(response.data.message);
     }
   } catch (err: unknown) {
     if (err instanceof Error || err instanceof AxiosError) {

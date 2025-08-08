@@ -21,4 +21,5 @@ export const fakeUser: UserI = {
   bio: 'fakeBio',
   profilePic: 'fakeProfilePic',
   isPrivate: false,
+  isVerified: true,
 };
