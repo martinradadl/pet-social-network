@@ -37,6 +37,11 @@ type State = {
   isExpirationModalOpen: boolean;
 };
 
+const useAuthInitialState = {
+  user: null,
+  isExpirationModalOpen: false,
+};
+
 axios.interceptors.request.use(
   config => {
     if (isExpired()) {
@@ -114,7 +119,9 @@ export const login = async (loggedUser: LoginI) => {
 
 export const logout = () => {
   clearStorage();
-  setUser(null);
+  useAuth.setState(() => {
+    return useAuthInitialState;
+  });
 };
 
 export const forgotPassword = async (email: string) => {
@@ -186,8 +193,5 @@ export const changePassword = async (userId: string, newPassword: string) => {
 };
 
 export const useAuth = create<State>(() => {
-  return {
-    user: null,
-    isExpirationModalOpen: false,
-  };
+  return useAuthInitialState;
 });
