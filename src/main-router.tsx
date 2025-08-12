@@ -6,9 +6,10 @@ import {Login} from './pages/auth/login';
 import {SignUp} from './pages/auth/sign-up';
 import {SignUpCompleted} from './pages/auth/sign-up-completed';
 import {ForgotPassword} from './pages/auth/forgot-password';
-import {useAuth} from './data/auth';
-import {useShallow} from 'zustand/react/shallow';
 import ToastManager from 'toastify-react-native';
+import {user as userStorageItem} from './helpers/storage';
+import {setUser, useAuth, UserI} from './data/auth';
+import {useShallow} from 'zustand/react/shallow';
 
 export type RootStackScreensList = {
   Login: undefined;
@@ -30,8 +31,13 @@ const App = () => {
   );
 
   React.useEffect(() => {
-    if (user?._id) {
+    const userStoragedString = userStorageItem();
+    const userStoraged: UserI | null = userStoragedString
+      ? JSON.parse(userStoragedString)
+      : null;
+    if (userStoraged) {
       setIsAuthenticated(true);
+      setUser(userStoraged);
     } else {
       setIsAuthenticated(false);
     }
