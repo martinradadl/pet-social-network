@@ -32,12 +32,7 @@ export const SignUp = () => {
 
   const onSubmit = async () => {
     try {
-      const newUser: RegisterI = {
-        email: getValues('email'),
-        username: getValues('username'),
-        password: getValues('password'),
-        name: getValues('name'),
-      };
+      const newUser: RegisterI = getValues();
 
       setIsSubmitLoading(true);
       await register(newUser, () => navigation.navigate('SignUpCompleted'));
