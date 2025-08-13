@@ -6,10 +6,11 @@ import {Login} from './pages/auth/login';
 import {SignUp} from './pages/auth/sign-up';
 import {SignUpCompleted} from './pages/auth/sign-up-completed';
 import {ForgotPassword} from './pages/auth/forgot-password';
-import ToastManager from 'toastify-react-native';
-import {user as userStorageItem} from './helpers/storage';
+import ToastManager, {Toast} from 'toastify-react-native';
+import {clearStorage, user as userStorageItem} from './helpers/storage';
 import {setUser, useAuth} from './data/auth';
 import {useShallow} from 'zustand/react/shallow';
+import {isExpired} from './helpers/utils';
 
 export type RootStackScreensList = {
   Login: undefined;
@@ -30,7 +31,10 @@ const App = () => {
 
   React.useEffect(() => {
     const userStoraged = userStorageItem();
-    if (userStoraged) {
+    if (isExpired() && userStoraged) {
+      clearStorage();
+      Toast.info('Your session has expired');
+    } else if (userStoraged) {
       setUser(userStoraged);
     }
   }, []);
