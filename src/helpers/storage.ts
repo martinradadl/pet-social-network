@@ -20,6 +20,9 @@ export const clearStorage = () => {
   deleteStorageItem('expiresOn');
 };
 
-export const user = () => storage.getString('user');
+export const user = () => {
+  const userString = storage.getString('user');
+  return userString ? JSON.parse(userString) : null;
+};
 export const jwt = () => storage.getString('jwt');
 export const expiresOn = () => storage.getInt('expiresOn');

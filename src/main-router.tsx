@@ -8,7 +8,7 @@ import {SignUpCompleted} from './pages/auth/sign-up-completed';
 import {ForgotPassword} from './pages/auth/forgot-password';
 import ToastManager from 'toastify-react-native';
 import {user as userStorageItem} from './helpers/storage';
-import {setUser, useAuth, UserI} from './data/auth';
+import {setUser, useAuth} from './data/auth';
 import {useShallow} from 'zustand/react/shallow';
 
 export type RootStackScreensList = {
@@ -22,8 +22,6 @@ export type RootStackScreensList = {
 const Stack = createNativeStackNavigator<RootStackScreensList>();
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-
   const {user} = useAuth(
     useShallow(state => ({
       user: state.user,
@@ -31,22 +29,16 @@ const App = () => {
   );
 
   React.useEffect(() => {
-    const userStoragedString = userStorageItem();
-    const userStoraged: UserI | null = userStoragedString
-      ? JSON.parse(userStoragedString)
-      : null;
+    const userStoraged = userStorageItem();
     if (userStoraged) {
-      setIsAuthenticated(true);
       setUser(userStoraged);
-    } else {
-      setIsAuthenticated(false);
     }
-  }, [user?._id]);
+  }, []);
 
   return (
     <React.Fragment>
       <NavigationContainer>
-        {isAuthenticated ? (
+        {user?._id ? (
           <Stack.Navigator>
             <Stack.Screen
               name="MainContent"
