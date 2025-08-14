@@ -6,8 +6,11 @@ export const authStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 32,
+    gap: 10,
   },
-  title: {fontSize: 40},
+  title: {fontSize: 40, marginBottom: 20, textAlign: 'center'},
+  message: {fontSize: 20, textAlign: 'center'},
+  formItem: {width: '100%'},
   formInput: {
     height: 40,
     width: '100%',
@@ -18,24 +21,26 @@ export const authStyles = StyleSheet.create({
     color: '#000000',
     paddingHorizontal: 8,
   },
+  formInputError: {
+    paddingLeft: 4,
+    color: 'red',
+    fontSize: 10,
+    marginBottom: -4,
+  },
   submitButton: {
-    height: 44,
+    marginTop: 10,
+    paddingVertical: 10,
     width: '100%',
     borderRadius: 6,
     backgroundColor: '#3897F0',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  submitButtonText: {fontSize: 20, color: 'white'},
+  submitButtonText: {fontSize: 20, color: 'white', marginHorizontal: 'auto'},
+  loginRedirectButton: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 6,
+    backgroundColor: '#3897F0',
+  },
   additionalOption: {fontSize: 16},
-  formSpacer: {
-    height: 10,
-  },
-  submitSpacer: {
-    height: 20,
-  },
-  titleSpacer: {
-    height: 30,
-  },
   boldText: {fontWeight: 'bold'},
 });

@@ -18,7 +18,7 @@ const generateIcon = (name: iconNames) => {
   );
 };
 
-export const Footer = () => {
+export const MainContent = () => {
   return (
     <Tab.Navigator
       screenOptions={{

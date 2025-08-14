@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Icon from '@react-native-vector-icons/material-icons';
 import {StoriesCarousel} from '../components/stories/stories-carousel';
+import {logout} from '../data/auth';
 
 const HEADER_HEIGHT = 86;
 
@@ -38,7 +39,8 @@ export const Profile = () => {
         <Icon name="lock-outline" size={20} color="#900" />
         <Text style={styles.username}>{username}</Text>
         <Icon name="add-box" size={36} color="#900" />
-        <Icon name="menu" size={36} color="#900" />
+        {/*TODO move logout to user settings page*/}
+        <Icon name="menu" size={36} color="#900" onPress={logout} />
       </Animated.View>
 
       <Animated.ScrollView
