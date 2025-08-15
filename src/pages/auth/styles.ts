@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../global-styles';
 
 export const authStyles = StyleSheet.create({
   container: {
@@ -15,15 +16,15 @@ export const authStyles = StyleSheet.create({
     height: 40,
     width: '100%',
     borderRadius: 6,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.BACKGROUND,
     borderWidth: 1,
-    borderColor: '#B3B9BD',
-    color: '#000000',
+    borderColor: COLORS.INPUT,
+    color: COLORS.PRIMARY_TEXT,
     paddingHorizontal: 8,
   },
   formInputError: {
     paddingLeft: 4,
-    color: 'red',
+    color: COLORS.ERROR,
     fontSize: 10,
     marginBottom: -4,
   },
@@ -32,14 +33,18 @@ export const authStyles = StyleSheet.create({
     paddingVertical: 10,
     width: '100%',
     borderRadius: 6,
-    backgroundColor: '#3897F0',
+    backgroundColor: COLORS.PRIMARY_BUTTON,
   },
-  submitButtonText: {fontSize: 20, color: 'white', marginHorizontal: 'auto'},
+  submitButtonText: {
+    fontSize: 20,
+    color: COLORS.SECONDARY_TEXT,
+    marginHorizontal: 'auto',
+  },
   loginRedirectButton: {
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 6,
-    backgroundColor: '#3897F0',
+    backgroundColor: COLORS.PRIMARY_BUTTON,
   },
   additionalOption: {fontSize: 16},
   boldText: {fontWeight: 'bold'},

@@ -2,6 +2,7 @@ import Icon from '@react-native-vector-icons/material-icons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Home} from '../pages/home';
 import {Profile} from '../pages/profile';
+import {COLORS} from '../global-styles';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +23,7 @@ export const MainContent = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarIconStyle: {color: '#900', fontSize: 20},
+        tabBarIconStyle: {color: COLORS.ERROR, fontSize: 20},
         headerShown: false,
       }}>
       <Tab.Screen

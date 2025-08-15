@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../global-styles';
 
 export const storyIconStyles = StyleSheet.create({
   container: {
@@ -8,8 +9,8 @@ export const storyIconStyles = StyleSheet.create({
   userPhoto: {
     height: 72,
     width: 72,
-    borderRadius: 9999999,
-    backgroundColor: 'red',
+    borderRadius: '50%',
+    backgroundColor: COLORS.SECONDARY_BUTTON,
   },
   username: {fontSize: 16},
 });

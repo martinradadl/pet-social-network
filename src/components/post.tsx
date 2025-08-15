@@ -1,6 +1,7 @@
 import {Text, View} from 'react-native';
 import {postStyles as styles} from './styles';
 import Icon from '@react-native-vector-icons/material-icons';
+import {COLORS} from '../global-styles';
 
 export const Post = () => {
   const username = 'username';
@@ -16,31 +17,43 @@ export const Post = () => {
       <View style={styles.header}>
         <View style={styles.userProfilePic} />
         <Text style={styles.username}>{username}</Text>
-        <Icon name="more-vert" size={iconsSize} color="#900" />
+        <Icon name="more-vert" size={iconsSize} color={COLORS.PRIMARY_TEXT} />
       </View>
       <View style={styles.files} />
       <View style={styles.options}>
         <View style={styles.mainOptions}>
           <View style={styles.option}>
-            <Icon name="favorite-border" size={iconsSize} color="#900" />
+            <Icon
+              name="favorite-border"
+              size={iconsSize}
+              color={COLORS.PRIMARY_TEXT}
+            />
             <Text style={styles.count}>
               {likesCount > 0 ? likesCount : null}
             </Text>
           </View>
           <View style={styles.option}>
-            <Icon name="comment" size={iconsSize} color="#900" />
+            <Icon name="comment" size={iconsSize} color={COLORS.PRIMARY_TEXT} />
             <Text style={styles.count}>
               {commentsCount > 0 ? commentsCount : null}
             </Text>
           </View>
           <View style={styles.option}>
-            <Icon name="chat-bubble-outline" size={iconsSize} color="#900" />
+            <Icon
+              name="chat-bubble-outline"
+              size={iconsSize}
+              color={COLORS.PRIMARY_TEXT}
+            />
             <Text style={styles.count}>
               {sentsCount > 0 ? sentsCount : null}
             </Text>
           </View>
         </View>
-        <Icon name="bookmark-border" size={iconsSize} color="#900" />
+        <Icon
+          name="bookmark-border"
+          size={iconsSize}
+          color={COLORS.PRIMARY_TEXT}
+        />
       </View>
       <Text style={styles.description}>
         <Text style={styles.usernameOnDescription}>{username}</Text>{' '}
