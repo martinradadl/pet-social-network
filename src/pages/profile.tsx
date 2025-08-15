@@ -10,6 +10,7 @@ import {
 import Icon from '@react-native-vector-icons/material-icons';
 import {StoriesCarousel} from '../components/stories/stories-carousel';
 import {logout} from '../data/auth';
+import {COLORS} from '../global-styles';
 
 const HEADER_HEIGHT = 86;
 
@@ -36,11 +37,11 @@ export const Profile = () => {
           styles.header,
           {transform: [{translateY: headerTranslateAnim}]},
         ]}>
-        <Icon name="lock-outline" size={20} color="#900" />
+        <Icon name="lock-outline" size={20} color={COLORS.PRIMARY_TEXT} />
         <Text style={styles.username}>{username}</Text>
-        <Icon name="add-box" size={36} color="#900" />
+        <Icon name="add-box" size={36} color={COLORS.PRIMARY_TEXT} />
         {/*TODO move logout to user settings page*/}
-        <Icon name="menu" size={36} color="#900" onPress={logout} />
+        <Icon name="menu" size={36} color={COLORS.PRIMARY_TEXT} onPress={logout} />
       </Animated.View>
 
       <Animated.ScrollView
@@ -83,9 +84,9 @@ export const Profile = () => {
         <StoriesCarousel />
 
         <View style={styles.tabs}>
-          <Icon name="apps" size={32} color="#900" />
-          <Icon name="autorenew" size={32} color="#900" />
-          <Icon name="portrait" size={32} color="#900" />
+          <Icon name="apps" size={32} color={COLORS.PRIMARY_TEXT} />
+          <Icon name="autorenew" size={32} color={COLORS.PRIMARY_TEXT} />
+          <Icon name="portrait" size={32} color={COLORS.PRIMARY_TEXT} />
         </View>
       </Animated.ScrollView>
     </SafeAreaView>
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     paddingTop: 28,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.BACKGROUND,
     zIndex: 1000,
     elevation: 4,
     height: HEADER_HEIGHT,
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     borderRadius: 9999999,
-    backgroundColor: 'red',
+    backgroundColor: COLORS.SECONDARY_BUTTON,
   },
   counter: {gap: 3, alignItems: 'center'},
   counterValue: {fontSize: 24, fontWeight: 'bold'},
@@ -136,11 +137,11 @@ const styles = StyleSheet.create({
   options: {flexDirection: 'row', gap: 8, paddingTop: 12, paddingBottom: 20},
   optionsButton: {
     borderRadius: 6,
-    backgroundColor: 'gray',
+    backgroundColor: COLORS.SECONDARY_BUTTON,
     paddingVertical: 4,
     flex: 1,
     alignItems: 'center',
   },
-  optionsButtonText: {color: 'white', fontSize: 16},
+  optionsButtonText: {color: COLORS.SECONDARY_TEXT, fontSize: 16},
   tabs: {flexDirection: 'row', justifyContent: 'space-around'},
 });

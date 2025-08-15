@@ -8,6 +8,7 @@ import {useState} from 'react';
 import {Toast} from 'toastify-react-native';
 import Icon from '@react-native-vector-icons/material-icons';
 import {forgotPassword} from '../../data/auth';
+import {COLORS} from '../../global-styles';
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackScreensList,
@@ -36,7 +37,7 @@ export const ForgotPassword = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Icon name="lock-outline" size={48} color="black" />
+      <Icon name="lock-outline" size={48} color={COLORS.PRIMARY_TEXT} />
 
       <Text style={{...styles.title, ...styles.boldText}}>
         Trouble with Logging in?
@@ -52,7 +53,7 @@ export const ForgotPassword = () => {
         onChangeText={onChangeEmail}
         value={email}
         placeholder="Email or username"
-        placeholderTextColor={'#B3B9BD'}
+        placeholderTextColor={COLORS.INPUT}
       />
 
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>

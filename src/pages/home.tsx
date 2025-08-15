@@ -3,6 +3,7 @@ import Icon from '@react-native-vector-icons/material-icons';
 import {useRef} from 'react';
 import {Post} from '../components/post';
 import {StoriesCarousel} from '../components/stories/stories-carousel';
+import {COLORS} from '../global-styles';
 
 const HEADER_HEIGHT = 86;
 
@@ -23,8 +24,12 @@ export const Home = () => {
           {transform: [{translateY: headerTranslateAnim}]},
         ]}>
         <Text style={styles.title}>Petgram</Text>
-        <Icon name="favorite-border" size={32} color="#900" />
-        <Icon name="chat-bubble-outline" size={32} color="#900" />
+        <Icon name="favorite-border" size={32} color={COLORS.PRIMARY_TEXT} />
+        <Icon
+          name="chat-bubble-outline"
+          size={32}
+          color={COLORS.PRIMARY_TEXT}
+        />
       </Animated.View>
 
       <Animated.ScrollView
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     paddingTop: 28,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.BACKGROUND,
     zIndex: 1000,
     elevation: 4,
     height: HEADER_HEIGHT,
