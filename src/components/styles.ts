@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../global-styles';
 
 export const postStyles = StyleSheet.create({
   header: {
@@ -12,12 +13,12 @@ export const postStyles = StyleSheet.create({
     height: 40,
     width: 40,
     borderRadius: 9999999,
-    backgroundColor: 'red',
+    backgroundColor: COLORS.SECONDARY_BUTTON,
   },
   username: {flex: 1, fontSize: 20},
   files: {
     height: 240,
-    backgroundColor: 'red',
+    backgroundColor: COLORS.SECONDARY_BUTTON,
   },
   options: {
     flexDirection: 'row',
@@ -38,6 +39,6 @@ export const postStyles = StyleSheet.create({
     fontSize: 20,
   },
   description: {fontSize: 20, paddingHorizontal: 8},
-  date: {fontSize: 16, color: 'gray', paddingHorizontal: 8},
+  date: {fontSize: 16, color: COLORS.LABEL_TEXT, paddingHorizontal: 8},
   usernameOnDescription: {fontWeight: 'bold'},
 });
