@@ -7,7 +7,8 @@ import {useNavigation} from '@react-navigation/native';
 import {authStyles as styles} from './styles';
 import {register, RegisterI} from '../../data/auth';
 import {Controller, useForm} from 'react-hook-form';
-import {emailRegex} from '../../helpers/utils';
+import {VALIDATIONS} from '../../validations';
+import {COLORS} from '../../global-styles';
 
 type NavigationProp = NativeStackNavigationProp<RootStackScreensList, 'SignUp'>;
 
@@ -52,8 +53,8 @@ export const SignUp = () => {
         <Controller
           control={control}
           rules={{
-            required: {message: 'This field is required', value: true},
-            pattern: {message: 'Invalid email format', value: emailRegex},
+            required: VALIDATIONS.REQUIRED,
+            pattern: VALIDATIONS.EMAIL_PATTERN,
           }}
           render={({field: {onChange, value}}) => (
             <TextInput
@@ -61,7 +62,7 @@ export const SignUp = () => {
               onChangeText={onChange}
               value={value}
               placeholder="Email"
-              placeholderTextColor={'#B3B9BD'}
+              placeholderTextColor={COLORS.INPUT}
               editable={!isSubmitLoading}
             />
           )}
@@ -76,15 +77,9 @@ export const SignUp = () => {
         <Controller
           control={control}
           rules={{
-            required: {message: 'This field is required', value: true},
-            minLength: {
-              message: 'At least 3 characters are required',
-              value: 3,
-            },
-            maxLength: {
-              message: 'No more than 26 characters are allowed',
-              value: 26,
-            },
+            required: VALIDATIONS.REQUIRED,
+            minLength: VALIDATIONS.MIN(3),
+            maxLength: VALIDATIONS.MAX(26),
           }}
           render={({field: {onChange, value}}) => (
             <TextInput
@@ -92,7 +87,7 @@ export const SignUp = () => {
               onChangeText={onChange}
               value={value}
               placeholder="Full Name"
-              placeholderTextColor={'#B3B9BD'}
+              placeholderTextColor={COLORS.INPUT}
               editable={!isSubmitLoading}
             />
           )}
@@ -107,15 +102,10 @@ export const SignUp = () => {
         <Controller
           control={control}
           rules={{
-            required: {message: 'This field is required', value: true},
-            minLength: {
-              message: 'At least 3 characters are required',
-              value: 3,
-            },
-            maxLength: {
-              message: 'No more than 20 characters are allowed',
-              value: 20,
-            },
+            required: VALIDATIONS.REQUIRED,
+            minLength: VALIDATIONS.MIN(3),
+            maxLength: VALIDATIONS.MAX(20),
+            pattern: VALIDATIONS.USERNAME_PATTERN,
           }}
           render={({field: {onChange, value}}) => (
             <TextInput
@@ -123,7 +113,7 @@ export const SignUp = () => {
               onChangeText={onChange}
               value={value}
               placeholder="Username"
-              placeholderTextColor={'#B3B9BD'}
+              placeholderTextColor={COLORS.INPUT}
               editable={!isSubmitLoading}
             />
           )}
@@ -138,15 +128,9 @@ export const SignUp = () => {
         <Controller
           control={control}
           rules={{
-            required: {message: 'This field is required', value: true},
-            minLength: {
-              message: 'At least 6 characters are required',
-              value: 6,
-            },
-            maxLength: {
-              message: 'No more than 40 characters are allowed',
-              value: 40,
-            },
+            required: VALIDATIONS.REQUIRED,
+            minLength: VALIDATIONS.MIN(6),
+            maxLength: VALIDATIONS.MAX(40),
           }}
           render={({field: {onChange, value}}) => (
             <TextInput
@@ -155,7 +139,7 @@ export const SignUp = () => {
               value={value}
               placeholder="Password"
               secureTextEntry={true}
-              placeholderTextColor={'#B3B9BD'}
+              placeholderTextColor={COLORS.INPUT}
               editable={!isSubmitLoading}
             />
           )}
