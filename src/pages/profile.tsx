@@ -41,7 +41,12 @@ export const Profile = () => {
         <Text style={styles.username}>{username}</Text>
         <Icon name="add-box" size={36} color={COLORS.PRIMARY_TEXT} />
         {/*TODO move logout to user settings page*/}
-        <Icon name="menu" size={36} color={COLORS.PRIMARY_TEXT} onPress={logout} />
+        <Icon
+          name="menu"
+          size={36}
+          color={COLORS.PRIMARY_TEXT}
+          onPress={logout}
+        />
       </Animated.View>
 
       <Animated.ScrollView
@@ -126,7 +131,7 @@ const styles = StyleSheet.create({
   userPhoto: {
     height: 80,
     width: 80,
-    borderRadius: 9999999,
+    borderRadius: '50%',
     backgroundColor: COLORS.SECONDARY_BUTTON,
   },
   counter: {gap: 3, alignItems: 'center'},

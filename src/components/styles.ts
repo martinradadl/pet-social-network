@@ -12,7 +12,7 @@ export const postStyles = StyleSheet.create({
   userProfilePic: {
     height: 40,
     width: 40,
-    borderRadius: 9999999,
+    borderRadius: '50%',
     backgroundColor: COLORS.SECONDARY_BUTTON,
   },
   username: {flex: 1, fontSize: 20},
