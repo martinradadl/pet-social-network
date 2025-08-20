@@ -33,7 +33,11 @@ export const Post = () => {
             </Text>
           </View>
           <View style={styles.option}>
-            <Icon name="comment" size={iconsSize} color={COLORS.PRIMARY_TEXT} />
+            <Icon
+              name="list-alt"
+              size={iconsSize}
+              color={COLORS.PRIMARY_TEXT}
+            />
             <Text style={styles.count}>
               {commentsCount > 0 ? commentsCount : null}
             </Text>
