@@ -10,6 +10,12 @@ export const VALIDATIONS = {
     message: `No more than ${value} characters are allowed`,
     value,
   }),
-  EMAIL_PATTERN: {message: 'Invalid email format', value: emailRegex},
-  USERNAME_PATTERN: {message: 'Invalid username format', value: usernameRegex},
+  EMAIL_PATTERN: {
+    message: 'Invalid email format, please check help button',
+    value: emailRegex,
+  },
+  USERNAME_PATTERN: {
+    message: 'Invalid username format, please check help button',
+    value: usernameRegex,
+  },
 };
