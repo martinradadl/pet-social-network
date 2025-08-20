@@ -29,10 +29,12 @@ export const authStyles = StyleSheet.create({
   },
   formInputWithTooltip: {flex: 1},
   formInputWithoutTooltip: {marginRight: 24},
-  tooltip: {
+  tooltipText: {
     position: 'absolute',
-    maxWidth: '92%',
     top: 44,
+    left: 0,
+    right: 0,
+    maxWidth: '92%',
     backgroundColor: 'white',
     padding: 6,
     borderRadius: 6,
@@ -41,13 +43,6 @@ export const authStyles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     zIndex: 1000,
-    alignItems: 'flex-start', // Ensures content is aligned at the top-left
-    justifyContent: 'flex-start', // Keeps content aligned to the top
-    flexDirection: 'column',
-  },
-  tooltipText: {
-    flexWrap: 'wrap', // Ensures text wraps if it's too long for a single line
-    flexShrink: 1, // Ensures it shrinks to fit, but won't overflow
   },
   tooltipIcon: {
     width: 24,

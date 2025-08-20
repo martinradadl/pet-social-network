@@ -1,6 +1,12 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useState} from 'react';
-import {Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {RootStackScreensList} from '../../main-router';
 import {useNavigation} from '@react-navigation/native';
@@ -49,157 +55,169 @@ export const SignUp = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Petgram</Text>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        if (emailTooltipVisible || usernameTooltipVisible) {
+          setEmailTooltipVisible(false);
+          setUsernameTooltipVisible(false);
+        }
+      }}>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.title}>Petgram</Text>
 
-      <View style={styles.formItem}>
-        <Controller
-          control={control}
-          rules={{
-            required: VALIDATIONS.REQUIRED,
-            pattern: VALIDATIONS.EMAIL_PATTERN,
-          }}
-          render={({field: {onChange, value}}) => (
-            <View style={styles.wrapperForTooltip}>
-              <TextInput
-                style={[styles.formInput, styles.formInputWithTooltip]}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Email"
-                placeholderTextColor={COLORS.INPUT}
-                editable={!isSubmitLoading}
-              />
+        <View style={styles.formItem}>
+          <Controller
+            control={control}
+            rules={{
+              required: VALIDATIONS.REQUIRED,
+              pattern: VALIDATIONS.EMAIL_PATTERN,
+            }}
+            render={({field: {onChange, value}}) => (
+              <View style={styles.wrapperForTooltip}>
+                <TextInput
+                  style={[styles.formInput, styles.formInputWithTooltip]}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Email"
+                  placeholderTextColor={COLORS.INPUT}
+                  editable={!isSubmitLoading}
+                />
 
-              <Icon
-                name="help"
-                style={styles.tooltipIcon}
-                color={COLORS.PRIMARY_TEXT}
-                onPress={() => setEmailTooltipVisible(!emailTooltipVisible)}
-              />
+                <TouchableOpacity
+                  style={styles.tooltipIcon}
+                  onPress={() => setEmailTooltipVisible(!emailTooltipVisible)}>
+                  <Icon
+                    name="help"
+                    style={styles.tooltipIcon}
+                    color={COLORS.PRIMARY_TEXT}
+                  />
+                </TouchableOpacity>
 
-              {emailTooltipVisible && (
-                <View style={styles.tooltip}>
-                  <Text>Incorrect format</Text>
-                </View>
-              )}
-            </View>
-          )}
-          name="email"
-        />
-        {errors.email && (
-          <Text style={styles.formInputError}>{errors.email.message}</Text>
-        )}
-      </View>
-
-      <View style={styles.formItem}>
-        <Controller
-          control={control}
-          rules={{
-            required: VALIDATIONS.REQUIRED,
-            minLength: VALIDATIONS.MIN(3),
-            maxLength: VALIDATIONS.MAX(26),
-          }}
-          render={({field: {onChange, value}}) => (
-            <TextInput
-              style={[styles.formInput, styles.formInputWithoutTooltip]}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Full Name"
-              placeholderTextColor={COLORS.INPUT}
-              editable={!isSubmitLoading}
-            />
-          )}
-          name="name"
-        />
-        {errors.name && (
-          <Text style={styles.formInputError}>{errors.name.message}</Text>
-        )}
-      </View>
-
-      <View style={styles.formItem}>
-        <Controller
-          control={control}
-          rules={{
-            required: VALIDATIONS.REQUIRED,
-            minLength: VALIDATIONS.MIN(3),
-            maxLength: VALIDATIONS.MAX(20),
-            pattern: VALIDATIONS.USERNAME_PATTERN,
-          }}
-          render={({field: {onChange, value}}) => (
-            <View style={styles.wrapperForTooltip}>
-              <TextInput
-                style={[styles.formInput, styles.formInputWithTooltip]}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Username"
-                placeholderTextColor={COLORS.INPUT}
-                editable={!isSubmitLoading}
-              />
-
-              <Icon
-                name="help"
-                style={styles.tooltipIcon}
-                color={COLORS.PRIMARY_TEXT}
-                onPress={() =>
-                  setUsernameTooltipVisible(!usernameTooltipVisible)
-                }
-              />
-
-              {usernameTooltipVisible && (
-                <View style={styles.tooltip}>
+                {emailTooltipVisible && (
                   <Text style={styles.tooltipText}>
-                    Incorrect form, username must have at least one letter but
-                    can also include nembers, underscores and dots
+                    Email has to follow a correct format
                   </Text>
-                </View>
-              )}
-            </View>
+                )}
+              </View>
+            )}
+            name="email"
+          />
+          {errors.email && (
+            <Text style={styles.formInputError}>{errors.email.message}</Text>
           )}
-          name="username"
-        />
-        {errors.username && (
-          <Text style={styles.formInputError}>{errors.username.message}</Text>
-        )}
-      </View>
+        </View>
 
-      <View style={styles.formItem}>
-        <Controller
-          control={control}
-          rules={{
-            required: VALIDATIONS.REQUIRED,
-            minLength: VALIDATIONS.MIN(6),
-            maxLength: VALIDATIONS.MAX(40),
-          }}
-          render={({field: {onChange, value}}) => (
-            <TextInput
-              style={[styles.formInput, styles.formInputWithoutTooltip]}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Password"
-              secureTextEntry={true}
-              placeholderTextColor={COLORS.INPUT}
-              editable={!isSubmitLoading}
-            />
+        <View style={styles.formItem}>
+          <Controller
+            control={control}
+            rules={{
+              required: VALIDATIONS.REQUIRED,
+              minLength: VALIDATIONS.MIN(3),
+              maxLength: VALIDATIONS.MAX(26),
+            }}
+            render={({field: {onChange, value}}) => (
+              <TextInput
+                style={[styles.formInput, styles.formInputWithoutTooltip]}
+                onChangeText={onChange}
+                value={value}
+                placeholder="Full Name"
+                placeholderTextColor={COLORS.INPUT}
+                editable={!isSubmitLoading}
+              />
+            )}
+            name="name"
+          />
+          {errors.name && (
+            <Text style={styles.formInputError}>{errors.name.message}</Text>
           )}
-          name="password"
-        />
-        {errors.password && (
-          <Text style={styles.formInputError}>{errors.password.message}</Text>
-        )}
-      </View>
+        </View>
 
-      <TouchableOpacity
-        style={styles.submitButton}
-        onPress={handleSubmit(onSubmit)}
-        disabled={isSubmitLoading}>
-        <Text style={styles.submitButtonText}>Sign Up</Text>
-      </TouchableOpacity>
+        <View style={styles.formItem}>
+          <Controller
+            control={control}
+            rules={{
+              required: VALIDATIONS.REQUIRED,
+              minLength: VALIDATIONS.MIN(3),
+              maxLength: VALIDATIONS.MAX(20),
+              pattern: VALIDATIONS.USERNAME_PATTERN,
+            }}
+            render={({field: {onChange, value}}) => (
+              <View style={styles.wrapperForTooltip}>
+                <TextInput
+                  style={[styles.formInput, styles.formInputWithTooltip]}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Username"
+                  placeholderTextColor={COLORS.INPUT}
+                  editable={!isSubmitLoading}
+                />
 
-      <Text
-        style={styles.additionalOption}
-        onPress={() => navigation.navigate('Login')}>
-        Have an account? <Text style={styles.boldText}>log in.</Text>
-      </Text>
-    </SafeAreaView>
+                <TouchableOpacity
+                  style={styles.tooltipIcon}
+                  onPress={() =>
+                    setUsernameTooltipVisible(!usernameTooltipVisible)
+                  }>
+                  <Icon
+                    name="help"
+                    style={styles.tooltipIcon}
+                    color={COLORS.PRIMARY_TEXT}
+                  />
+                </TouchableOpacity>
+
+                {usernameTooltipVisible && (
+                  <Text style={styles.tooltipText}>
+                    Username must have at least one letter but can also include
+                    numbers, underscores and dots
+                  </Text>
+                )}
+              </View>
+            )}
+            name="username"
+          />
+          {errors.username && (
+            <Text style={styles.formInputError}>{errors.username.message}</Text>
+          )}
+        </View>
+
+        <View style={styles.formItem}>
+          <Controller
+            control={control}
+            rules={{
+              required: VALIDATIONS.REQUIRED,
+              minLength: VALIDATIONS.MIN(6),
+              maxLength: VALIDATIONS.MAX(40),
+            }}
+            render={({field: {onChange, value}}) => (
+              <TextInput
+                style={[styles.formInput, styles.formInputWithoutTooltip]}
+                onChangeText={onChange}
+                value={value}
+                placeholder="Password"
+                secureTextEntry={true}
+                placeholderTextColor={COLORS.INPUT}
+                editable={!isSubmitLoading}
+              />
+            )}
+            name="password"
+          />
+          {errors.password && (
+            <Text style={styles.formInputError}>{errors.password.message}</Text>
+          )}
+        </View>
+
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={handleSubmit(onSubmit)}
+          disabled={isSubmitLoading}>
+          <Text style={styles.submitButtonText}>Sign Up</Text>
+        </TouchableOpacity>
+
+        <Text
+          style={styles.additionalOption}
+          onPress={() => navigation.navigate('Login')}>
+          Have an account? <Text style={styles.boldText}>log in.</Text>
+        </Text>
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
