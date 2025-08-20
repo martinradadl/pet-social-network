@@ -9,6 +9,7 @@ import {register, RegisterI} from '../../data/auth';
 import {Controller, useForm} from 'react-hook-form';
 import {VALIDATIONS} from '../../validations';
 import {COLORS} from '../../global-styles';
+import Icon from '@react-native-vector-icons/material-icons';
 
 type NavigationProp = NativeStackNavigationProp<RootStackScreensList, 'SignUp'>;
 
@@ -21,6 +22,8 @@ type FormInputs = {
 
 export const SignUp = () => {
   const navigation = useNavigation<NavigationProp>();
+  const [emailTooltipVisible, setEmailTooltipVisible] = useState(false);
+  const [usernameTooltipVisible, setUsernameTooltipVisible] = useState(false);
 
   const {
     control,
@@ -57,14 +60,29 @@ export const SignUp = () => {
             pattern: VALIDATIONS.EMAIL_PATTERN,
           }}
           render={({field: {onChange, value}}) => (
-            <TextInput
-              style={styles.formInput}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Email"
-              placeholderTextColor={COLORS.INPUT}
-              editable={!isSubmitLoading}
-            />
+            <View style={styles.wrapperForTooltip}>
+              <TextInput
+                style={[styles.formInput, styles.formInputWithTooltip]}
+                onChangeText={onChange}
+                value={value}
+                placeholder="Email"
+                placeholderTextColor={COLORS.INPUT}
+                editable={!isSubmitLoading}
+              />
+
+              <Icon
+                name="help"
+                style={styles.tooltipIcon}
+                color={COLORS.PRIMARY_TEXT}
+                onPress={() => setEmailTooltipVisible(!emailTooltipVisible)}
+              />
+
+              {emailTooltipVisible && (
+                <View style={styles.tooltip}>
+                  <Text>Incorrect format</Text>
+                </View>
+              )}
+            </View>
           )}
           name="email"
         />
@@ -83,7 +101,7 @@ export const SignUp = () => {
           }}
           render={({field: {onChange, value}}) => (
             <TextInput
-              style={styles.formInput}
+              style={[styles.formInput, styles.formInputWithoutTooltip]}
               onChangeText={onChange}
               value={value}
               placeholder="Full Name"
@@ -108,14 +126,34 @@ export const SignUp = () => {
             pattern: VALIDATIONS.USERNAME_PATTERN,
           }}
           render={({field: {onChange, value}}) => (
-            <TextInput
-              style={styles.formInput}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Username"
-              placeholderTextColor={COLORS.INPUT}
-              editable={!isSubmitLoading}
-            />
+            <View style={styles.wrapperForTooltip}>
+              <TextInput
+                style={[styles.formInput, styles.formInputWithTooltip]}
+                onChangeText={onChange}
+                value={value}
+                placeholder="Username"
+                placeholderTextColor={COLORS.INPUT}
+                editable={!isSubmitLoading}
+              />
+
+              <Icon
+                name="help"
+                style={styles.tooltipIcon}
+                color={COLORS.PRIMARY_TEXT}
+                onPress={() =>
+                  setUsernameTooltipVisible(!usernameTooltipVisible)
+                }
+              />
+
+              {usernameTooltipVisible && (
+                <View style={styles.tooltip}>
+                  <Text style={styles.tooltipText}>
+                    Incorrect form, username must have at least one letter but
+                    can also include nembers, underscores and dots
+                  </Text>
+                </View>
+              )}
+            </View>
           )}
           name="username"
         />
@@ -134,7 +172,7 @@ export const SignUp = () => {
           }}
           render={({field: {onChange, value}}) => (
             <TextInput
-              style={styles.formInput}
+              style={[styles.formInput, styles.formInputWithoutTooltip]}
               onChangeText={onChange}
               value={value}
               placeholder="Password"

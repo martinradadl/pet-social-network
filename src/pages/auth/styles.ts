@@ -12,15 +12,46 @@ export const authStyles = StyleSheet.create({
   title: {fontSize: 40, marginBottom: 20, textAlign: 'center'},
   message: {fontSize: 20, textAlign: 'center'},
   formItem: {width: '100%'},
+  wrapperForTooltip: {
+    position: 'relative',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 2,
+  },
   formInput: {
-    height: 40,
-    width: '100%',
+    minHeight: 40,
     borderRadius: 6,
     backgroundColor: COLORS.BACKGROUND,
     borderWidth: 1,
     borderColor: COLORS.INPUT,
     color: COLORS.PRIMARY_TEXT,
     paddingHorizontal: 8,
+  },
+  formInputWithTooltip: {flex: 1},
+  formInputWithoutTooltip: {marginRight: 24},
+  tooltip: {
+    position: 'absolute',
+    maxWidth: '92%',
+    top: 44,
+    backgroundColor: 'white',
+    padding: 6,
+    borderRadius: 6,
+    elevation: 4, // shadow on Android
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    zIndex: 1000,
+    alignItems: 'flex-start', // Ensures content is aligned at the top-left
+    justifyContent: 'flex-start', // Keeps content aligned to the top
+    flexDirection: 'column',
+  },
+  tooltipText: {
+    flexWrap: 'wrap', // Ensures text wraps if it's too long for a single line
+    flexShrink: 1, // Ensures it shrinks to fit, but won't overflow
+  },
+  tooltipIcon: {
+    width: 24,
+    fontSize: 26,
   },
   formInputError: {
     paddingLeft: 4,
