@@ -2,6 +2,7 @@ import {useShallow} from 'zustand/shallow';
 import {logout, setIsExpirationModalOpen, useAuth} from '../data/auth';
 import {Modal, Pressable, StyleSheet, Text, View} from 'react-native';
 import Icon from '@react-native-vector-icons/material-icons';
+import {COLORS} from '../global-styles';
 
 export const ExpirationModal = () => {
   const {isExpirationModalOpen} = useAuth(
@@ -22,7 +23,7 @@ export const ExpirationModal = () => {
       visible={isExpirationModalOpen}
       onRequestClose={close}>
       <View style={styles.container}>
-        <Icon name="warning-amber" size={36} color="#900" />
+        <Icon name="warning-amber" size={36} color={COLORS.ERROR} />
         <Text style={styles.title}>Session Expired</Text>
         <Text style={styles.message}>
           Your session has expired, please login again.
@@ -48,7 +49,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 6,
-    backgroundColor: 'red',
+    backgroundColor: COLORS.SECONDARY_BUTTON,
   },
-  buttonText: {fontSize: 20, color: 'white', marginHorizontal: 'auto'},
+  buttonText: {
+    fontSize: 20,
+    color: COLORS.SECONDARY_TEXT,
+    marginHorizontal: 'auto',
+  },
 });

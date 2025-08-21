@@ -9,6 +9,8 @@ import {Toast} from 'toastify-react-native';
 import {login, LoginI} from '../../data/auth';
 import {Controller, useForm} from 'react-hook-form';
 import {emailRegex} from '../../helpers/utils';
+import {VALIDATIONS} from '../../validations';
+import {COLORS} from '../../global-styles';
 
 type NavigationProp = NativeStackNavigationProp<RootStackScreensList, 'Login'>;
 
@@ -56,14 +58,14 @@ export const Login = () => {
       <View style={styles.formItem}>
         <Controller
           control={control}
-          rules={{required: {message: 'This field is required', value: true}}}
+          rules={{required: VALIDATIONS.REQUIRED}}
           render={({field: {onChange, value}}) => (
             <TextInput
               style={styles.formInput}
               onChangeText={onChange}
               value={value}
               placeholder="Email or username"
-              placeholderTextColor={'#B3B9BD'}
+              placeholderTextColor={COLORS.INPUT}
               editable={!isSubmitLoading}
             />
           )}
@@ -79,14 +81,14 @@ export const Login = () => {
       <View style={styles.formItem}>
         <Controller
           control={control}
-          rules={{required: {message: 'This field is required', value: true}}}
+          rules={{required: VALIDATIONS.REQUIRED}}
           render={({field: {onChange, value}}) => (
             <TextInput
               style={styles.formInput}
               onChangeText={onChange}
               value={value}
               placeholder="Password"
-              placeholderTextColor={'#B3B9BD'}
+              placeholderTextColor={COLORS.INPUT}
               editable={!isSubmitLoading}
               secureTextEntry={true}
             />
