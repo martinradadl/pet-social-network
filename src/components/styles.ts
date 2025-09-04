@@ -39,6 +39,6 @@ export const postStyles = StyleSheet.create({
     fontSize: 20,
   },
   description: {fontSize: 20, paddingHorizontal: 8},
-  date: {fontSize: 16, color: COLORS.LABEL_TEXT, paddingHorizontal: 8},
+  date: {fontSize: 16, color: COLORS.SECONDARY_BUTTON, paddingHorizontal: 8},
   usernameOnDescription: {fontWeight: 'bold'},
 });
