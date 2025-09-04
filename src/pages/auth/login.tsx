@@ -21,6 +21,8 @@ type FormInputs = {
 
 export const Login = () => {
   const navigation = useNavigation<NavigationProp>();
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
+  const isEmail = () => emailRegex.test(getValues('usernameOrEmail'));
 
   const {
     control,
@@ -28,10 +30,6 @@ export const Login = () => {
     formState: {errors},
     getValues,
   } = useForm<FormInputs>();
-
-  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
-
-  const isEmail = () => emailRegex.test(getValues('usernameOrEmail'));
 
   const onSubmit = async () => {
     try {
