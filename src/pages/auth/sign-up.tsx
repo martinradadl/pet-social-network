@@ -30,6 +30,7 @@ export const SignUp = () => {
   const navigation = useNavigation<NavigationProp>();
   const [emailTooltipVisible, setEmailTooltipVisible] = useState(false);
   const [usernameTooltipVisible, setUsernameTooltipVisible] = useState(false);
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
   const {
     control,
@@ -37,8 +38,6 @@ export const SignUp = () => {
     formState: {errors},
     getValues,
   } = useForm<FormInputs>();
-
-  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
   const onSubmit = async () => {
     try {

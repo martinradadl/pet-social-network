@@ -1,27 +1,27 @@
-import {useRef} from 'react';
 import {
-  Animated,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import Icon from '@react-native-vector-icons/material-icons';
-import {StoriesCarousel} from '../components/stories/stories-carousel';
-import {logout} from '../data/auth';
-import {COLORS} from '../global-styles';
+import {StoriesCarousel} from '../../components/stories/stories-carousel';
+import {COLORS} from '../../global-styles';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
+import {RootStackScreensList} from '../../main-router';
 
 const HEADER_HEIGHT = 86;
 
+type NavigationProp = NativeStackNavigationProp<
+  RootStackScreensList,
+  'ProfileRouter'
+>;
+
 export const Profile = () => {
-  const scrollY = useRef(new Animated.Value(0)).current;
-  const diffClampScrollY = Animated.diffClamp(scrollY, 0, HEADER_HEIGHT);
-  const headerTranslateAnim = diffClampScrollY.interpolate({
-    inputRange: [0, HEADER_HEIGHT],
-    outputRange: [0, -HEADER_HEIGHT],
-    extrapolate: 'clamp',
-  });
+  const navigation = useNavigation<NavigationProp>();
 
   const username = 'username';
   const postsCount = 8;
@@ -32,11 +32,7 @@ export const Profile = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Animated.View
-        style={[
-          styles.header,
-          {transform: [{translateY: headerTranslateAnim}]},
-        ]}>
+      <View style={styles.header}>
         <Icon name="lock-outline" size={20} color={COLORS.PRIMARY_TEXT} />
         <Text style={styles.username}>{username}</Text>
         <Icon name="add-box" size={36} color={COLORS.PRIMARY_TEXT} />
@@ -45,17 +41,13 @@ export const Profile = () => {
           name="menu"
           size={36}
           color={COLORS.PRIMARY_TEXT}
-          onPress={logout}
+          onPress={() =>
+            navigation.navigate('ProfileRouter', {screen: 'Options'})
+          }
         />
-      </Animated.View>
+      </View>
 
-      <Animated.ScrollView
-        contentContainerStyle={{paddingTop: HEADER_HEIGHT}}
-        scrollEventThrottle={16}
-        onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {y: scrollY}}}],
-          {useNativeDriver: true},
-        )}>
+      <ScrollView>
         <View style={styles.details}>
           <View style={styles.overview}>
             <View style={styles.userPhoto} />
@@ -93,7 +85,7 @@ export const Profile = () => {
           <Icon name="autorenew" size={32} color={COLORS.PRIMARY_TEXT} />
           <Icon name="portrait" size={32} color={COLORS.PRIMARY_TEXT} />
         </View>
-      </Animated.ScrollView>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -104,14 +96,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
     paddingTop: 28,
     backgroundColor: COLORS.BACKGROUND,
-    zIndex: 1000,
-    elevation: 4,
     height: HEADER_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center',
