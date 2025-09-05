@@ -25,6 +25,7 @@ interface ChangePasswordModalProps {
   setModalVisible: (modalVisible: boolean) => void;
 }
 
+//TODO Refactor renders on Form Items Controllers
 export const ChangePasswordModal = (props: ChangePasswordModalProps) => {
   const {modalVisible, setModalVisible} = props;
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
