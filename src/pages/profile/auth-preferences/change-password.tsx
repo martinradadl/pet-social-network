@@ -26,6 +26,7 @@ interface ChangePasswordModalProps {
 }
 
 export const ChangePasswordModal = (props: ChangePasswordModalProps) => {
+  const {modalVisible, setModalVisible} = props;
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
   const {user} = useAuth(
@@ -63,9 +64,9 @@ export const ChangePasswordModal = (props: ChangePasswordModalProps) => {
     <Modal
       animationType="slide"
       transparent={true}
-      visible={props.modalVisible}
+      visible={modalVisible}
       onRequestClose={() => {
-        props.setModalVisible(!props.modalVisible);
+        setModalVisible(!modalVisible);
       }}>
       <View>
         <Text>Change Password</Text>

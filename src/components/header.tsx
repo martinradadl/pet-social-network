@@ -14,9 +14,11 @@ type NavigationProp = NativeStackNavigationProp<
   'ProfileRouter'
 >;
 
+const HEADER_ICON_SIZE = 32;
+
 export const ScreenHeader = (props: HeaderProps) => {
-  const HEADER_ICON_SIZE = 32;
   const navigation = useNavigation<NavigationProp>();
+  const {title} = props;
 
   return (
     <View style={styles.header}>
@@ -26,7 +28,7 @@ export const ScreenHeader = (props: HeaderProps) => {
         color={COLORS.PRIMARY_TEXT}
         onPress={() => navigation.goBack()}
       />
-      <Text style={styles.title}>{props.title}</Text>
+      <Text style={styles.title}>{title}</Text>
     </View>
   );
 };

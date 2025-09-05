@@ -33,11 +33,13 @@ type ProfileOptionProps = {
 const OPTIONS_ICON_SIZE = 34;
 
 const ProfileOption = (props: ProfileOptionProps) => {
+  const {label, onPress, icon, hasWarningLabel} = props;
+
   return (
-    <TouchableOpacity style={styles.optionsItem} onPress={props.onPress}>
-      {props.icon ? (
+    <TouchableOpacity style={styles.optionsItem} onPress={onPress}>
+      {icon ? (
         <Icon
-          name={props.icon}
+          name={icon}
           size={OPTIONS_ICON_SIZE}
           color={COLORS.PRIMARY_TEXT}
         />
@@ -45,9 +47,9 @@ const ProfileOption = (props: ProfileOptionProps) => {
       <Text
         style={{
           ...styles.optionsLabel,
-          ...(props.hasWarningLabel ? styles.warningLabel : null),
+          ...(hasWarningLabel ? styles.warningLabel : null),
         }}>
-        {props.label}
+        {label}
       </Text>
       <Icon
         name="keyboard-arrow-right"
