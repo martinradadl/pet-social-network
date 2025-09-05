@@ -9,10 +9,11 @@ import {
   View,
 } from 'react-native';
 import {Toast} from 'toastify-react-native';
-import {changePassword, useAuth} from '../../../data/auth';
+import {changePassword, checkPassword, useAuth} from '../../../data/auth';
 import {useShallow} from 'zustand/react/shallow';
 import {VALIDATIONS} from '../../../validations';
 import {COLORS} from '../../../global-styles';
+import Icon from '@react-native-vector-icons/material-icons';
 
 type FormInputs = {
   currentPassword: string;
@@ -23,11 +24,30 @@ type FormInputs = {
 interface ChangePasswordModalProps {
   modalVisible: boolean;
   setModalVisible: (modalVisible: boolean) => void;
+  setSuccessModalVisible: (modalVisible: boolean) => void;
 }
 
-//TODO Refactor renders on Form Items Controllers
+const renderInput =
+  (placeholder: string, isSubmitLoading: boolean) =>
+  ({
+    field: {onChange, value},
+  }: {
+    field: {onChange: (text: string) => void; value: string};
+  }) =>
+    (
+      <TextInput
+        style={styles.formInput}
+        onChangeText={onChange}
+        value={value}
+        placeholder={placeholder}
+        placeholderTextColor={COLORS.INPUT}
+        editable={!isSubmitLoading}
+        secureTextEntry={true}
+      />
+    );
+
 export const ChangePasswordModal = (props: ChangePasswordModalProps) => {
-  const {modalVisible, setModalVisible} = props;
+  const {modalVisible, setModalVisible, setSuccessModalVisible} = props;
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
 
   const {user} = useAuth(
@@ -45,12 +65,23 @@ export const ChangePasswordModal = (props: ChangePasswordModalProps) => {
 
   const onSubmit = async () => {
     try {
-      if (user) {
-        if (getValues().newPassword !== getValues().confirmNewPassword) {
-          Toast.error('Confirm new password does not match the new password');
-        } else {
+      if (getValues().newPassword !== getValues().confirmNewPassword) {
+        Toast.error('Confirm new password does not match with new password');
+      } else {
+        if (user?._id) {
           setIsSubmitLoading(true);
-          await changePassword(user._id, getValues().newPassword);
+          const isCorrectPassword = await checkPassword(
+            user._id,
+            getValues().currentPassword,
+          );
+
+          if (isCorrectPassword) {
+            await changePassword(user._id, getValues().newPassword);
+            setSuccessModalVisible(true);
+            setModalVisible(false);
+          } else {
+            Toast.warn('The current password you typed is not valid');
+          }
           setIsSubmitLoading(false);
         }
       }
@@ -69,101 +100,109 @@ export const ChangePasswordModal = (props: ChangePasswordModalProps) => {
       onRequestClose={() => {
         setModalVisible(!modalVisible);
       }}>
-      <View>
-        <Text>Change Password</Text>
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Change Password</Text>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => {
+                setModalVisible(false);
+              }}>
+              <Icon name={'close'} size={28} color={COLORS.PRIMARY_TEXT} />
+            </TouchableOpacity>
+          </View>
 
-        <View style={styles.formItem}>
-          <Controller
-            control={control}
-            rules={{required: VALIDATIONS.REQUIRED}}
-            render={({field: {onChange, value}}) => (
-              <TextInput
-                style={styles.formInput}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Current password"
-                placeholderTextColor={COLORS.INPUT}
-                editable={!isSubmitLoading}
-                secureTextEntry={true}
-              />
+          <View style={styles.formItem}>
+            <Controller
+              control={control}
+              rules={{required: VALIDATIONS.REQUIRED}}
+              render={renderInput('Current password', isSubmitLoading)}
+              name="currentPassword"
+            />
+            {errors.currentPassword && (
+              <Text style={styles.formInputError}>
+                {errors.currentPassword.message}
+              </Text>
             )}
-            name="currentPassword"
-          />
-          {errors.currentPassword && (
-            <Text style={styles.formInputError}>
-              {errors.currentPassword.message}
-            </Text>
-          )}
-        </View>
+          </View>
 
-        <View style={styles.formItem}>
-          <Controller
-            control={control}
-            rules={{
-              required: VALIDATIONS.REQUIRED,
-              minLength: VALIDATIONS.MIN(6),
-              maxLength: VALIDATIONS.MAX(40),
-            }}
-            render={({field: {onChange, value}}) => (
-              <TextInput
-                style={styles.formInput}
-                onChangeText={onChange}
-                value={value}
-                placeholder="New password"
-                placeholderTextColor={COLORS.INPUT}
-                editable={!isSubmitLoading}
-                secureTextEntry={true}
-              />
+          <View style={styles.formItem}>
+            <Controller
+              control={control}
+              rules={{
+                required: VALIDATIONS.REQUIRED,
+                minLength: VALIDATIONS.MIN(6),
+                maxLength: VALIDATIONS.MAX(40),
+              }}
+              render={renderInput('New password', isSubmitLoading)}
+              name="newPassword"
+            />
+            {errors.newPassword && (
+              <Text style={styles.formInputError}>
+                {errors.newPassword.message}
+              </Text>
             )}
-            name="newPassword"
-          />
-          {errors.newPassword && (
-            <Text style={styles.formInputError}>
-              {errors.newPassword.message}
-            </Text>
-          )}
-        </View>
+          </View>
 
-        <View style={styles.formItem}>
-          <Controller
-            control={control}
-            rules={{
-              required: VALIDATIONS.REQUIRED,
-              minLength: VALIDATIONS.MIN(6),
-              maxLength: VALIDATIONS.MAX(40),
-            }}
-            render={({field: {onChange, value}}) => (
-              <TextInput
-                style={styles.formInput}
-                onChangeText={onChange}
-                value={value}
-                placeholder="Confirm new password"
-                placeholderTextColor={COLORS.INPUT}
-                editable={!isSubmitLoading}
-                secureTextEntry={true}
-              />
+          <View style={styles.formItem}>
+            <Controller
+              control={control}
+              rules={{
+                required: VALIDATIONS.REQUIRED,
+                minLength: VALIDATIONS.MIN(6),
+                maxLength: VALIDATIONS.MAX(40),
+              }}
+              render={renderInput('Confirm new password', isSubmitLoading)}
+              name="confirmNewPassword"
+            />
+            {errors.confirmNewPassword && (
+              <Text style={styles.formInputError}>
+                {errors.confirmNewPassword.message}
+              </Text>
             )}
-            name="confirmNewPassword"
-          />
-          {errors.confirmNewPassword && (
-            <Text style={styles.formInputError}>
-              {errors.confirmNewPassword.message}
-            </Text>
-          )}
-        </View>
+          </View>
 
-        <TouchableOpacity
-          style={styles.submitButton}
-          onPress={handleSubmit(onSubmit)}
-          disabled={isSubmitLoading}>
-          <Text style={styles.submitButtonText}>Submit</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.submitButton}
+            onPress={handleSubmit(onSubmit)}
+            disabled={isSubmitLoading}>
+            <Text style={styles.submitButtonText}>Submit</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </Modal>
   );
 };
 
 export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 16,
+  },
+  content: {
+    backgroundColor: COLORS.BACKGROUND,
+    width: '100%',
+    paddingVertical: 20,
+    paddingHorizontal: 16,
+    gap: 10,
+    borderRadius: 8,
+    elevation: 20,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    position: 'relative',
+    marginBottom: 10,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: COLORS.PRIMARY_TEXT,
+  },
+  closeButton: {position: 'absolute', right: 0},
   formItem: {width: '100%'},
   formInput: {
     minHeight: 40,
