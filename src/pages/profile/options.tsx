@@ -17,6 +17,7 @@ import {logout} from '../../data/auth';
 import {ChangePasswordModal} from './auth-preferences/change-password';
 import {RootStackScreensList} from '../../main-router';
 import {ScreenHeader} from '../../components/header';
+import {SuccessfulPasswordChangeModal} from './auth-preferences/success-modal';
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackScreensList,
@@ -65,6 +66,7 @@ export const ProfileOptions = () => {
   const [search, onChangeSearch] = useState('');
   const [isChangePasswordModalVisible, setIsChangePasswordModalVisible] =
     useState(false);
+  const [isSuccessModalVisible, setSuccessModalVisible] = useState(false);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -102,10 +104,20 @@ export const ProfileOptions = () => {
         <View style={styles.sectionWrapper}>
           <View style={styles.fullWidthLine} />
           <Text style={styles.sectionTitle}>Authentication preferences</Text>
-          <ProfileOption label="Change password" onPress={() => {}} />
+          <ProfileOption
+            label="Change password"
+            onPress={() => {
+              setIsChangePasswordModalVisible(true);
+            }}
+          />
           <ChangePasswordModal
             modalVisible={isChangePasswordModalVisible}
             setModalVisible={setIsChangePasswordModalVisible}
+            setSuccessModalVisible={setSuccessModalVisible}
+          />
+          <SuccessfulPasswordChangeModal
+            modalVisible={isSuccessModalVisible}
+            setModalVisible={setSuccessModalVisible}
           />
           <ProfileOption
             label="Delete account"
