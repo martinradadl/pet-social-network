@@ -11,7 +11,7 @@ type HeaderProps = {
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackScreensList,
-  'ProfileRouter'
+  'ProfileOptionsRouter'
 >;
 
 const HEADER_ICON_SIZE = 32;

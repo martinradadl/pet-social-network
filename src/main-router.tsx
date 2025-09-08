@@ -14,7 +14,7 @@ import {clearStorage, user as userStorageItem} from './helpers/storage';
 import {setUser, useAuth} from './data/auth';
 import {useShallow} from 'zustand/react/shallow';
 import {isExpired} from './helpers/utils';
-import {ProfileRouter, ProfileStackScreensList} from './pages/profile/router';
+import {ProfileOptionsRouter, ProfileOptionsStackScreensList} from './pages/profile/router';
 
 export type RootStackScreensList = {
   Login: undefined;
@@ -22,7 +22,7 @@ export type RootStackScreensList = {
   SignUpCompleted: undefined;
   MainContent: undefined;
   ForgotPassword: undefined;
-  ProfileRouter: NavigatorScreenParams<ProfileStackScreensList>;
+  ProfileOptionsRouter: NavigatorScreenParams<ProfileOptionsStackScreensList>;
 };
 
 const Stack = createNativeStackNavigator<RootStackScreensList>();
@@ -55,8 +55,8 @@ const App = () => {
               options={{headerShown: false}}
             />
             <Stack.Screen
-              name="ProfileRouter"
-              component={ProfileRouter}
+              name="ProfileOptionsRouter"
+              component={ProfileOptionsRouter}
               options={{headerShown: false}}
             />
           </Stack.Navigator>
