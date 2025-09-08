@@ -1,6 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ProfileOptions} from './options';
-import {Profile} from '.';
 import {SavedPosts} from './content-preferences/saved';
 import {Archive} from './content-preferences/archive';
 import {YourActivity} from './account-preferences/your-activity';
@@ -11,15 +10,20 @@ import {Muted} from './who-you-see/muted';
 import {Favorites} from './who-you-see/favorites';
 import {CloseFriends} from './who-you-see/close-friends';
 import {ReportProblem} from './more/report-problem';
+import {NavigatorScreenParams} from '@react-navigation/native';
+import {
+  YourActivityRouter,
+  YourActivityStackScreensList,
+} from './account-preferences/your-activity/router';
 
-export type ProfileStackScreensList = {
-  Profile: undefined;
+export type ProfileOptionsStackScreensList = {
   Options: undefined;
 
   Saved: undefined;
   Archive: undefined;
 
   YourActivity: undefined;
+  YourActivityRouter: NavigatorScreenParams<YourActivityStackScreensList>;
   AccountPrivacy: undefined;
   Notifications: undefined;
 
@@ -31,16 +35,11 @@ export type ProfileStackScreensList = {
   ReportProblem: undefined;
 };
 
-const Stack = createNativeStackNavigator<ProfileStackScreensList>();
+const Stack = createNativeStackNavigator<ProfileOptionsStackScreensList>();
 
-export const ProfileRouter = () => {
+export const ProfileOptionsRouter = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{headerShown: false}}
-      />
       <Stack.Screen
         name="Options"
         component={ProfileOptions}
@@ -59,6 +58,11 @@ export const ProfileRouter = () => {
       <Stack.Screen
         name="YourActivity"
         component={YourActivity}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="YourActivityRouter"
+        component={YourActivityRouter}
         options={{headerShown: false}}
       />
       <Stack.Screen
