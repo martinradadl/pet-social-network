@@ -1,65 +1,21 @@
-import Icon from '@react-native-vector-icons/material-icons';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {COLORS} from '../../global-styles';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
-import {OPTIONS_LIST, OptionsIcon} from './options-list';
+import {PROFILE_OPTIONS_LIST} from './options-list';
 import {logout} from '../../data/auth';
 import {ChangePasswordModal} from './auth-preferences/change-password';
 import {RootStackScreensList} from '../../main-router';
 import {ScreenHeader} from '../../components/header';
 import {SuccessfulPasswordChangeModal} from './auth-preferences/success-modal';
+import {ProfileOption} from './option';
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackScreensList,
-  'ProfileRouter'
+  'ProfileOptionsRouter'
 >;
-
-type ProfileOptionProps = {
-  icon?: OptionsIcon;
-  label: string;
-  onPress: () => void;
-  hasWarningLabel?: boolean;
-};
-
-const OPTIONS_ICON_SIZE = 34;
-
-const ProfileOption = (props: ProfileOptionProps) => {
-  const {label, onPress, icon, hasWarningLabel} = props;
-
-  return (
-    <TouchableOpacity style={styles.optionsItem} onPress={onPress}>
-      {icon ? (
-        <Icon
-          name={icon}
-          size={OPTIONS_ICON_SIZE}
-          color={COLORS.PRIMARY_TEXT}
-        />
-      ) : null}
-      <Text
-        style={{
-          ...styles.optionsLabel,
-          ...(hasWarningLabel ? styles.warningLabel : null),
-        }}>
-        {label}
-      </Text>
-      <Icon
-        name="keyboard-arrow-right"
-        size={OPTIONS_ICON_SIZE}
-        color={COLORS.SECONDARY_BUTTON}
-      />
-    </TouchableOpacity>
-  );
-};
 
 export const ProfileOptions = () => {
   const navigation = useNavigation<NavigationProp>();
@@ -82,7 +38,7 @@ export const ProfileOptions = () => {
           placeholderTextColor={COLORS.LABEL_TEXT}
         />
 
-        {OPTIONS_LIST.map((section, index) => (
+        {PROFILE_OPTIONS_LIST.map((section, index) => (
           <View key={index} style={styles.sectionWrapper}>
             <View style={styles.fullWidthLine} />
             <Text style={styles.sectionTitle}>{section.title}</Text>
@@ -93,7 +49,8 @@ export const ProfileOptions = () => {
                 icon={option.icon}
                 label={option.label}
                 onPress={() => {
-                  return navigation.navigate('ProfileRouter', {
+                  //@ts-expect-error routing error
+                  return navigation.navigate('ProfileOptionsRouter', {
                     screen: option.navigateTo,
                   });
                 }}
