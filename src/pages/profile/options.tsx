@@ -49,9 +49,9 @@ export const ProfileOptions = () => {
                 icon={option.icon}
                 label={option.label}
                 onPress={() => {
-                  //@ts-expect-error routing error
+                  // TODO Fix type error
                   return navigation.navigate('ProfileOptionsRouter', {
-                    screen: option.navigateTo,
+                    screen: option.navigateTo as any,
                   });
                 }}
               />
