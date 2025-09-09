@@ -19,7 +19,7 @@ export const AccountPrivacy = () => {
               false: COLORS.SECONDARY_BUTTON,
               true: COLORS.SECONDARY_BUTTON,
             }}
-            thumbColor={COLORS.PRIMARY_TEXT}
+            thumbColor={COLORS.LABEL_TEXT}
             onValueChange={toggleSwitch}
             value={isPrivate}
             style={{transform: [{scaleX: 1.4}, {scaleY: 1.4}]}}
