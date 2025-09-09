@@ -4,7 +4,6 @@ import {SavedPosts} from './content-preferences/saved';
 import {Archive} from './content-preferences/archive';
 import {YourActivity} from './account-preferences/your-activity';
 import {AccountPrivacy} from './account-preferences/account-privacy';
-import {Notifications} from './account-preferences/notifications';
 import {Blocked} from './who-you-see/blocked';
 import {Muted} from './who-you-see/muted';
 import {Favorites} from './who-you-see/favorites';
@@ -15,6 +14,11 @@ import {
   YourActivityRouter,
   YourActivityStackScreensList,
 } from './account-preferences/your-activity/router';
+import {
+  NotificationsSettingsRouter,
+  NotificationsSettingsStackScreensList,
+} from './account-preferences/notifications/router';
+import {NotificationsSettings} from './account-preferences/notifications/index';
 
 export type ProfileOptionsStackScreensList = {
   Options: undefined;
@@ -26,6 +30,7 @@ export type ProfileOptionsStackScreensList = {
   YourActivityRouter: NavigatorScreenParams<YourActivityStackScreensList>;
   AccountPrivacy: undefined;
   Notifications: undefined;
+  NotificationsRouter: NavigatorScreenParams<NotificationsSettingsStackScreensList>;
 
   Blocked: undefined;
   CloseFriends: undefined;
@@ -72,7 +77,12 @@ export const ProfileOptionsRouter = () => {
       />
       <Stack.Screen
         name="Notifications"
-        component={Notifications}
+        component={NotificationsSettings}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="NotificationsRouter"
+        component={NotificationsSettingsRouter}
         options={{headerShown: false}}
       />
       <Stack.Screen
