@@ -1,27 +1,36 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {ProfileOptions} from './options';
-import {Profile} from '.';
 import {SavedPosts} from './content-preferences/saved';
 import {Archive} from './content-preferences/archive';
 import {YourActivity} from './account-preferences/your-activity';
 import {AccountPrivacy} from './account-preferences/account-privacy';
-import {Notifications} from './account-preferences/notifications';
 import {Blocked} from './who-you-see/blocked';
 import {Muted} from './who-you-see/muted';
 import {Favorites} from './who-you-see/favorites';
 import {CloseFriends} from './who-you-see/close-friends';
 import {ReportProblem} from './more/report-problem';
+import {NavigatorScreenParams} from '@react-navigation/native';
+import {
+  YourActivityRouter,
+  YourActivityStackScreensList,
+} from './account-preferences/your-activity/router';
+import {
+  NotificationsSettingsRouter,
+  NotificationsSettingsStackScreensList,
+} from './account-preferences/notifications/router';
+import {NotificationsSettings} from './account-preferences/notifications/index';
 
-export type ProfileStackScreensList = {
-  Profile: undefined;
+export type ProfileOptionsStackScreensList = {
   Options: undefined;
 
   Saved: undefined;
   Archive: undefined;
 
   YourActivity: undefined;
+  YourActivityRouter: NavigatorScreenParams<YourActivityStackScreensList>;
   AccountPrivacy: undefined;
   Notifications: undefined;
+  NotificationsRouter: NavigatorScreenParams<NotificationsSettingsStackScreensList>;
 
   Blocked: undefined;
   CloseFriends: undefined;
@@ -31,16 +40,11 @@ export type ProfileStackScreensList = {
   ReportProblem: undefined;
 };
 
-const Stack = createNativeStackNavigator<ProfileStackScreensList>();
+const Stack = createNativeStackNavigator<ProfileOptionsStackScreensList>();
 
-export const ProfileRouter = () => {
+export const ProfileOptionsRouter = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{headerShown: false}}
-      />
       <Stack.Screen
         name="Options"
         component={ProfileOptions}
@@ -62,13 +66,23 @@ export const ProfileRouter = () => {
         options={{headerShown: false}}
       />
       <Stack.Screen
+        name="YourActivityRouter"
+        component={YourActivityRouter}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="AccountPrivacy"
         component={AccountPrivacy}
         options={{headerShown: false}}
       />
       <Stack.Screen
         name="Notifications"
-        component={Notifications}
+        component={NotificationsSettings}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="NotificationsRouter"
+        component={NotificationsSettingsRouter}
         options={{headerShown: false}}
       />
       <Stack.Screen

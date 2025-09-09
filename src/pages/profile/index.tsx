@@ -17,7 +17,7 @@ const HEADER_HEIGHT = 86;
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackScreensList,
-  'ProfileRouter'
+  'ProfileOptionsRouter'
 >;
 
 export const Profile = () => {
@@ -42,7 +42,7 @@ export const Profile = () => {
           size={36}
           color={COLORS.PRIMARY_TEXT}
           onPress={() =>
-            navigation.navigate('ProfileRouter', {screen: 'Options'})
+            navigation.navigate('ProfileOptionsRouter', {screen: 'Options'})
           }
         />
       </View>

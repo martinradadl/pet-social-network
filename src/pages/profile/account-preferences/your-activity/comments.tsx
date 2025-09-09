@@ -1,11 +1,11 @@
 import {ScrollView, StyleSheet, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {ScreenHeader} from '../../../components/header';
+import {ScreenHeader} from '../../../../components/header';
 
-export const Notifications = () => {
+export const UserCommentsList = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <ScreenHeader title="Notifications" />
+      <ScreenHeader title="Comments" />
       <ScrollView>
         <Text>Content</Text>
       </ScrollView>

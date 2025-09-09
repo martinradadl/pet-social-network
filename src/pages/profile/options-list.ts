@@ -1,6 +1,6 @@
-import {ProfileStackScreensList} from './router';
+import {ProfileOptionsStackScreensList} from './router';
 
-export type OptionsIcon =
+export type ProfileOptionsIcon =
   | 'bookmark-border'
   | 'lock-outline'
   | 'notifications-none'
@@ -13,17 +13,17 @@ export type OptionsIcon =
   | 'area-chart';
 
 type OptionItem = {
-  icon?: OptionsIcon;
+  icon?: ProfileOptionsIcon;
   label: string;
-  navigateTo: keyof ProfileStackScreensList;
+  navigateTo: keyof ProfileOptionsStackScreensList;
 };
 
-type ProfileOptionsSection = {
+type OptionsSection = {
   title: string;
   options: OptionItem[];
 };
 
-export const OPTIONS_LIST: ProfileOptionsSection[] = [
+export const PROFILE_OPTIONS_LIST: OptionsSection[] = [
   {
     title: 'Content preferences',
     options: [
