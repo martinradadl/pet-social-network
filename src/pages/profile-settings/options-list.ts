@@ -1,4 +1,4 @@
-import {ProfileOptionsStackScreensList} from './router';
+import {ProfileOptionsStackScreensList} from '../profile-settings/router';
 
 export type ProfileOptionsIcon =
   | 'bookmark-border'

@@ -88,6 +88,7 @@ export const ChangePasswordModal = (props: ChangePasswordModalProps) => {
     } catch (err: unknown) {
       if (err instanceof Error) {
         Toast.error(err.message);
+        setIsSubmitLoading(false);
       }
     }
   };

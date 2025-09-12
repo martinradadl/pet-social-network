@@ -1,8 +1,8 @@
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Icon from '@react-native-vector-icons/material-icons';
 import {COLORS} from '../../global-styles';
-import {ProfileOptionsIcon} from './options-list';
 import {YourActivityOptionsIcon} from './account-preferences/your-activity/options-list';
+import {ProfileOptionsIcon} from './options-list';
 
 type ProfileOptionProps = {
   icon?: ProfileOptionsIcon | YourActivityOptionsIcon;

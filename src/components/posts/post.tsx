@@ -1,7 +1,7 @@
 import {Text, View} from 'react-native';
 import {postStyles as styles} from './styles';
 import Icon from '@react-native-vector-icons/material-icons';
-import {COLORS} from '../global-styles';
+import {COLORS} from '../../global-styles';
 
 export const Post = () => {
   const username = 'username';
