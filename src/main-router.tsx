@@ -14,7 +14,7 @@ import {clearStorage, user as userStorageItem} from './helpers/storage';
 import {setUser, useAuth} from './data/auth';
 import {useShallow} from 'zustand/react/shallow';
 import {isExpired} from './helpers/utils';
-import {ProfileOptionsRouter, ProfileOptionsStackScreensList} from './pages/profile/router';
+import {ProfileOptionsRouter, ProfileOptionsStackScreensList} from './pages/profile-settings/router';
 
 export type RootStackScreensList = {
   Login: undefined;

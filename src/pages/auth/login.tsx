@@ -32,6 +32,7 @@ export const Login = () => {
   } = useForm<FormInputs>();
 
   const onSubmit = async () => {
+    setIsSubmitLoading(true);
     try {
       const credentials: LoginI = {password: getValues('password')};
       if (isEmail()) {
@@ -39,14 +40,13 @@ export const Login = () => {
       } else {
         credentials.username = getValues('usernameOrEmail');
       }
-      setIsSubmitLoading(true);
       await login(credentials);
-      setIsSubmitLoading(false);
     } catch (err: unknown) {
       if (err instanceof Error) {
         Toast.error(err.message);
       }
     }
+    setIsSubmitLoading(false);
   };
 
   return (

@@ -1,20 +1,25 @@
 import {ScrollView, StyleSheet} from 'react-native';
 import {StoryIcon} from '../home/story-icon';
 
-export const StoriesCarousel = () => {
+type StoryI = {
+  id: string;
+};
+
+type StoriesCarouselProps = {
+  storiesList: StoryI[];
+};
+
+export const StoriesCarousel = (props: StoriesCarouselProps) => {
+  const {storiesList} = props;
+
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.followedUsersStories}>
-      <StoryIcon />
-      <StoryIcon />
-      <StoryIcon />
-      <StoryIcon />
-      <StoryIcon />
-      <StoryIcon />
-      <StoryIcon />
-      <StoryIcon />
+      {(storiesList || []).map(story => (
+        <StoryIcon key={story.id} />
+      ))}
     </ScrollView>
   );
 };

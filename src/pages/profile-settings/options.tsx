@@ -4,13 +4,13 @@ import {COLORS} from '../../global-styles';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useNavigation} from '@react-navigation/native';
 import {useState} from 'react';
-import {PROFILE_OPTIONS_LIST} from './options-list';
 import {logout} from '../../data/auth';
 import {ChangePasswordModal} from './auth-preferences/change-password';
 import {RootStackScreensList} from '../../main-router';
 import {ScreenHeader} from '../../components/header';
 import {SuccessfulPasswordChangeModal} from './auth-preferences/success-modal';
 import {ProfileOption} from './option';
+import {PROFILE_OPTIONS_LIST} from './options-list';
 
 type NavigationProp = NativeStackNavigationProp<
   RootStackScreensList,

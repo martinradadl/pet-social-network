@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {COLORS} from '../global-styles';
+import { COLORS } from '../../global-styles';
 
 export const postStyles = StyleSheet.create({
   header: {
