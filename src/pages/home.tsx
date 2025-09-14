@@ -1,7 +1,7 @@
 import {Animated, SafeAreaView, StyleSheet, Text} from 'react-native';
 import Icon from '@react-native-vector-icons/material-icons';
 import {useRef} from 'react';
-import {Post} from '../components/post';
+import {Post} from '../components/posts/post';
 import {StoriesCarousel} from '../components/stories/stories-carousel';
 import {COLORS} from '../global-styles';
 
@@ -15,6 +15,8 @@ export const Home = () => {
     outputRange: [0, -HEADER_HEIGHT],
     extrapolate: 'clamp',
   });
+
+  const storiesList = Array.from({length: 7}, (_, i) => ({id: i.toString()}));
 
   return (
     <SafeAreaView style={styles.container}>
@@ -39,7 +41,7 @@ export const Home = () => {
           [{nativeEvent: {contentOffset: {y: scrollY}}}],
           {useNativeDriver: true},
         )}>
-        <StoriesCarousel />
+        <StoriesCarousel storiesList={storiesList} />
 
         <Post />
         <Post />
