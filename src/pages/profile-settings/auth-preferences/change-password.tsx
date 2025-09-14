@@ -64,12 +64,12 @@ export const ChangePasswordModal = (props: ChangePasswordModalProps) => {
   } = useForm<FormInputs>();
 
   const onSubmit = async () => {
+    setIsSubmitLoading(true);
     try {
       if (getValues().newPassword !== getValues().confirmNewPassword) {
         Toast.error('Confirm new password does not match with new password');
       } else {
         if (user?._id) {
-          setIsSubmitLoading(true);
           const isCorrectPassword = await checkPassword(
             user._id,
             getValues().currentPassword,
@@ -82,15 +82,14 @@ export const ChangePasswordModal = (props: ChangePasswordModalProps) => {
           } else {
             Toast.warn('The current password you typed is not valid');
           }
-          setIsSubmitLoading(false);
         }
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
         Toast.error(err.message);
-        setIsSubmitLoading(false);
       }
     }
+    setIsSubmitLoading(false);
   };
 
   return (
